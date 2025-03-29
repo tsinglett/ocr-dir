@@ -1,0 +1,50 @@
+# Logging configuration
+logging:
+  level: info                # Logging level (e.g., debug, info, warning, error, critical)
+  log_file: ''      # Path to the log file
+  print_level: info          # Logging level for console output
+
+# Input directory for PDF files
+input_dir: targets           # Directory to search for PDF files
+
+# Profiles for OCR processing
+profiles:
+  default:
+    output_type: "pdf"       # Outputs PDF format
+  detailed:
+    language: "eng"              # Language for OCR processing (e.g., "eng" for English)
+    output_type: "pdfa"          # Output type ('pdfa', 'pdf', 'pdfa-1', 'pdfa-2', 'pdfa-3', 'none')
+    force_ocr: false             # Force OCR even if the file is already an OCR PDF
+    deskew: true                 # Deskew the document, GREATLY INCREASES FILE SIZE
+    clean: true                  # Clean the document before OCR, doesn't apply edits to final PDF
+    clean_final: false           # Clean the document before OCR, applies edits to final PDF
+    rotate_pages: true           # Rotate pages based on the detected orientation
+    rotate_pages_threshold: 10.0 # Confidence threshold for rotation
+    remove_background: false     # Remove background from the document, destructive.
+    oversample: 300              # Oversample the document for better OCR accuracy
+    remove_vectors: false        # Whether to mask vectors in the document
+    jobs: 0                      # Number of CPU cores to use, 0 for all available cores
+    pdf_renderer: "auto"         # PDF renderer to use ('auto', 'hocr', 'sandwich', 'hocrdebug')
+  archival:
+    language: "eng"
+    output_type: "pdfa-3" #For maximum PDF/A conformance
+    force_ocr: false
+    deskew: true
+    clean_final: false
+    rotate_pages: true
+    oversample: 400
+    remove_background: false
+  fast_processing:
+    language: "eng"
+    output_type: "pdf"
+    force_ocr: false
+    deskew: false
+    clean_final: false
+    rotate_pages: false
+    jobs: 0 #Use all available cores
+  multilingual:
+    language: "eng+fra+deu"  # Example for multiple languages
+    output_type: "pdfa"
+    force_ocr: false
+    deskew: true
+    clean_final: false
